@@ -65,10 +65,6 @@ void mainFunction(){
     LineCamera.check();  //check if cameraTriger can be released
     
     if(Lane1.finished && Lane2.finished && Lane3.finished){
-      Serial.println(Lane1.duration);
-      Serial.println(Lane2.duration);
-      Serial.println(Lane3.duration);
-
       activeRace = false;
     }//END if(-all finished-)
   }//END while(activeRace)
