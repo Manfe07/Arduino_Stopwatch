@@ -70,7 +70,13 @@ void mainFunction(){
       Serial.println(Lane3.duration);
 
       activeRace = false;
-      armed = false;
     }//END if(-all finished-)
   }//END while(activeRace)
+  
+  while(armed){
+    if(digitalRead(Button_R)){
+      delay(saveTime_long);
+      armed = false;
+    }//END if(...)
+  }//END while(armed)
 }//END void mainFunction()
