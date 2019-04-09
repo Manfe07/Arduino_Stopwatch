@@ -12,16 +12,13 @@ bool cameraTrigered = false;
 bool cameraStoped = true;
 unsigned long cameraTrigered_time;
 
-Lane Lane1;
-Lane Lane2;
-Lane Lane3;
+Lane Lane1(Button_L1);
+Lane Lane2(Button_L2);
+Lane Lane3(Button_L3);
 
 void setup() {
   Serial.begin(9600);
 
-  pinMode(Button_L1,INPUT);
-  pinMode(Button_L2,INPUT);
-  pinMode(Button_L3,INPUT);
   pinMode(Button_R,INPUT);
   pinMode(Camera_Triger, OUTPUT);
   reset();
@@ -60,22 +57,16 @@ void reset(){
 }//END void reset()
 
 void mainFunction(){
-  if(digitalRead(Button_L1) || digitalRead(Button_L2) || digitalRead(Button_L3)){
+  if(Lane1.trigered() || Lane2.trigered() || Lane3.trigered()){
     start_time = millis();
     activeRace = true;
     delay(saveTime_long);
   }//END if(-any Button pressed-)
 
   while(activeRace){
-    if(digitalRead(Button_L1)){
-      Lane1.race_finished();
-    }//END if(Button_L1 pressed)
-    if(digitalRead(Button_L2)){
-      Lane2.race_finished();
-    }//END if(Button_L2 pressed)
-    if(digitalRead(Button_L3)){
-      Lane3.race_finished();
-    }//END if(Button_L3 pressed)
+    if(Lane1.trigered()){Lane1.race_finished();}
+    if(Lane2.trigered()){Lane2.race_finished();}
+    if(Lane3.trigered()){Lane3.race_finished();}
 
     checkCamera();  //check if cameraTriger can be released
     

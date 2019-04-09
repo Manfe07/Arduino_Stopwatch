@@ -1,10 +1,16 @@
 #include "stopwatch.h"
 #include <arduino.h>
 
-Lane::Lane(){
+Lane::Lane(int _pin){
+  Lane::pin = pin;
   Lane::finished = false;
   Lane::finish_time = 0;
+  pinMode(_pin,INPUT);
 }//END Lane::Lane()
+
+bool Lane::trigered(){
+  return digitalRead(Lane::pin);
+}
 
 void Lane::race_finished(){
   Lane::finish_time = millis();
