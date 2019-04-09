@@ -7,6 +7,7 @@
 //variables
 bool armed = false;
 bool activeRace = false;
+unsigned long start_time;
 
 Lane Lane1(Button_L1);
 Lane Lane2(Button_L2);
@@ -41,7 +42,6 @@ void loop() {
 
 
 void reset(){
-  start_time = 0;
 
   Lane1.reset();
   Lane2.reset();
@@ -58,9 +58,9 @@ void mainFunction(){
   }//END if(-any Button pressed-)
 
   while(activeRace){
-    if(Lane1.trigered()){Lane1.race_finished();LineCamera.takePhoto();}
-    if(Lane2.trigered()){Lane2.race_finished();LineCamera.takePhoto();}
-    if(Lane3.trigered()){Lane3.race_finished();LineCamera.takePhoto();}
+    if(Lane1.trigered()){Lane1.race_finished(start_time);LineCamera.takePhoto();}
+    if(Lane2.trigered()){Lane2.race_finished(start_time);LineCamera.takePhoto();}
+    if(Lane3.trigered()){Lane3.race_finished(start_time);LineCamera.takePhoto();}
 
     LineCamera.check();  //check if cameraTriger can be released
     

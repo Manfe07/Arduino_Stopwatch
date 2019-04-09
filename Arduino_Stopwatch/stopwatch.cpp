@@ -12,9 +12,9 @@ bool Lane::trigered(){
   return digitalRead(Lane::pin);
 }
 
-void Lane::race_finished(){
+void Lane::race_finished(unsigned long start_time){
   Lane::finish_time = millis();
-  Lane::duration = Lane::finish_time - start_time;
+  Lane::duration = (Lane::finish_time - start_time) / 1000;
   Lane::finished = true;
 }//END Lane::race_finished()
 
