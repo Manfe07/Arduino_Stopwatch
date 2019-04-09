@@ -6,7 +6,11 @@
 //variables
 bool armed = false;
 bool activeRace = false;
+
+//camera variables
 bool cameraTrigered = false;
+bool cameraStoped = true;
+unsigned long cameraTrigered_time;
 
 Lane Lane1;
 Lane Lane2;
@@ -73,6 +77,8 @@ void mainFunction(){
       Lane3.race_finished();
     }//END if(Button_L3 pressed)
 
+    checkCamera();  //check if cameraTriger can be released
+    
     if(Lane1.finished && Lane2.finished && Lane3.finished){
       Serial.println(Lane1.duration);
       Serial.println(Lane2.duration);
@@ -89,5 +95,17 @@ void takePhoto(){
   if(!cameraTrigered){
     digitalWrite(Camera_Triger, HIGH);
     cameraTrigered = true;
+    cameraTrigered_time = millis();
+    cameraStoped = false;
   }
-}
+}//END void takePhoto()
+
+void checkCamera(){
+  if(cameraTrigered && !cameraStoped){
+    if((cameraTrigered_time + photo_duration) >= millis)
+    {
+      digitalWrite(Camera_Triger, LOW);
+      cameraStoped = true;
+    }
+  }
+}//END void checkCamera()
