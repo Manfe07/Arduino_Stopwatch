@@ -1,4 +1,5 @@
 #include "stopwatch.h"
+#include "camera.h"
 #include "wiring.h"
 #include "settings.h"
 
