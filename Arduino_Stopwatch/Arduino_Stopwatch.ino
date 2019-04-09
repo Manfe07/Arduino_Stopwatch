@@ -2,8 +2,11 @@
 #include "wiring.h"
 #include "settings.h"
 
+
+//variables
 bool armed = false;
 bool activeRace = false;
+bool cameraTrigered = false;
 
 Lane Lane1;
 Lane Lane2;
@@ -16,7 +19,7 @@ void setup() {
   pinMode(Button_L2,INPUT);
   pinMode(Button_L3,INPUT);
   pinMode(Button_R,INPUT);
-
+  pinMode(Camera_Triger, OUTPUT);
   reset();
 }//END void setup()
 
@@ -39,7 +42,14 @@ void loop() {
 
 
 void reset(){
+  armed = false;
+  activeRace = false;
+  cameraTrigered = false;
+ 
   start_time = 0;
+ 
+  digitalWrite(Camera_Triger, LOW);
+
   Lane1.reset();
   Lane2.reset();
   Lane3.reset();
@@ -55,6 +65,7 @@ void mainFunction(){
   while(activeRace){
     if(digitalRead(Button_L1)){
       Lane1.race_finished();
+
     }
     if(digitalRead(Button_L2)){
       Lane2.race_finished();
@@ -74,3 +85,10 @@ void mainFunction(){
     }//END if(-all finished-)
   }//END while(activeRace)
 }//END void mainFunction()
+
+void takePhoto(){
+  if(!cameraTrigered){
+    digitalWrite(Camera_Triger, HIGH);
+    cameraTrigered = true;
+  }
+}
