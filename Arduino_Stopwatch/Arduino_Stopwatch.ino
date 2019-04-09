@@ -60,19 +60,18 @@ void mainFunction(){
     start_time = millis();
     activeRace = true;
     delay(saveTime_long);
-  }
+  }//END if(-any Button pressed-)
 
   while(activeRace){
     if(digitalRead(Button_L1)){
       Lane1.race_finished();
-
-    }
+    }//END if(Button_L1 pressed)
     if(digitalRead(Button_L2)){
       Lane2.race_finished();
-    }
+    }//END if(Button_L2 pressed)
     if(digitalRead(Button_L3)){
       Lane3.race_finished();
-    }
+    }//END if(Button_L3 pressed)
 
     if(Lane1.finished && Lane2.finished && Lane3.finished){
       Serial.println(Lane1.duration);
