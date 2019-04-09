@@ -5,21 +5,33 @@ static unsigned long start_time;
     
 class Lane{
   public:
-    //variables
+    Lane(int);
     bool finished;
     double duration;
     bool trigered(); 
-    //functions
-    Lane(int);
     void race_finished();
     void reset();
   //END public
   private:
-    //wiring
     int pin;
-    //variables
     unsigned long finish_time;
   //END private
 };//END class LANE{}
 
+
+class Camera{
+  public:
+    Camera(int, int);
+    void takePhoto();
+    void check();
+    void reset();
+  //END public
+  private:
+    int pin;
+    int duration;
+    bool trigered = false;
+    bool stoped = true;
+    unsigned long time_trigered;
+  //END private
+};//END class Camera{}
 #endif
