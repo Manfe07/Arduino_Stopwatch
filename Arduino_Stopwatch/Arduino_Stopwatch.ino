@@ -2,6 +2,7 @@
 #include "camera.h"
 #include "wiring.h"
 #include "settings.h"
+#include "functions.h"
 
 
 //variables
@@ -17,34 +18,32 @@ Camera LineCamera(Camera_Triger, photo_duration);
 
 void setup() {
   Serial.begin(9600);
-  Serial.println("connected");
-  pinMode(Button_R,INPUT);
+  debug("connected");
+  pinMode(Button_R,INPUT_PULLUP);
 
   reset();
 }//END void setup()
 
 void loop() {
-  if(digitalRead(Button_R)){
+  if(!digitalRead(Button_R)){
     armed = true;
-    Serial.println("armed");
-    delay(saveTime_long);
+    debug("armed");
+    wait(Button_R,saveTime_long);
   }
 
   while(armed){
-    if(digitalRead(Button_R)){
+    mainFunction();
+    if(!digitalRead(Button_R)){
       armed = false;
-      Serial.println("disarmed");
-      delay(saveTime_short);
-    }
-    else{
-      mainFunction();
+      debug("disarmed");
+      wait(Button_R,saveTime_long);
     }
   }
 }//END void loop()
 
 
 void reset(){
-  Serial.println("reset");
+  debug("reset");
 
   Lane1.reset();
   Lane2.reset();
@@ -56,29 +55,41 @@ void reset(){
 
 void mainFunction(){
   if(Lane1.trigered() || Lane2.trigered() || Lane3.trigered()){
-    Serial.println("start");
+    debug("start");
     start_time = millis();
     activeRace = true;
     delay(saveTime_long);
   }//END if(-any Button pressed-)
-
   while(activeRace){
-    if(Lane1.trigered()){Lane1.race_finished(start_time);LineCamera.takePhoto();Serial.println("lane1");}
-    if(Lane2.trigered()){Lane2.race_finished(start_time);LineCamera.takePhoto();Serial.println("lane2");}
-    if(Lane3.trigered()){Lane3.race_finished(start_time);LineCamera.takePhoto();Serial.println("lane3");}
+    if(Lane1.trigered() && !Lane1.finished){
+      Lane1.race_finished(start_time);
+      LineCamera.takePhoto();
+      debug("lane1");
+    }
+    if(Lane2.trigered() && !Lane2.finished){
+      Lane2.race_finished(start_time);
+      LineCamera.takePhoto();
+      debug("lane2");
+    }
+    if(Lane3.trigered() && !Lane3.finished){
+      Lane3.race_finished(start_time);
+      LineCamera.takePhoto();
+      debug("lane3");
+    }
 
     LineCamera.check();  //check if cameraTriger can be released
     
     if(Lane1.finished && Lane2.finished && Lane3.finished){
-      Serial.println("finish");
+      debug("finish");
       activeRace = false;
+
+      while(armed){
+        if(!digitalRead(Button_R)){
+          armed = false;
+          wait(Button_R,saveTime_long);
+          reset();
+        }//END if(...)
+      }//END while(armed)
     }//END if(-all finished-)
   }//END while(activeRace)
-  
-  while(armed){
-    if(digitalRead(Button_R)){
-      delay(saveTime_long);
-      armed = false;
-    }//END if(...)
-  }//END while(armed)
 }//END void mainFunction()

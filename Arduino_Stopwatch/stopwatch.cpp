@@ -2,14 +2,14 @@
 #include <arduino.h>
 
 Lane::Lane(int _pin){
-  Lane::pin = pin;
+  Lane::pin = _pin;
   Lane::finished = false;
   Lane::finish_time = 0;
-  pinMode(_pin,INPUT);
+  pinMode(_pin,INPUT_PULLUP);
 }//END Lane::Lane()
 
 bool Lane::trigered(){
-  return digitalRead(Lane::pin);
+  return !digitalRead(Lane::pin);
 }
 
 void Lane::race_finished(unsigned long start_time){
