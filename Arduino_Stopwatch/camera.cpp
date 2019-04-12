@@ -15,6 +15,7 @@ void Camera::takePhoto(){
     Camera::trigered = true;
     Camera::stoped = false;
     Camera::time_trigered = millis();
+    Serial.println("photo");
   }//END if(...)
 }//END void Camera::takePhoto()
 
@@ -23,6 +24,7 @@ void Camera::check(){
     if((Camera::time_trigered + Camera::duration) >= millis()){
       digitalWrite(Camera::pin, LOW);
       Camera::stoped = true;
+      Serial.println("camera-released");
     }//END if(...)
   }//END if(...)
 }//END void Camera::check()
