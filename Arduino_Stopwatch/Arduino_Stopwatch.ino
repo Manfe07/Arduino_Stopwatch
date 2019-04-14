@@ -73,23 +73,23 @@ void mainFunction(){
     if(Lane1.trigered() && !Lane1.finished){  //Lane1 finish
       Lane1.race_finished(start_time);
       LineCamera.takePhoto();
-      lcd.setCursor(1,3);
-      lcd.print("HOME ");
-      debug("lane1");
+      lcd.setCursor(0,3);
+      lcd.print("FINISH");
+      debug("lane1_finish");
     }
     if(Lane2.trigered() && !Lane2.finished){  //Lane2 finish
       Lane2.race_finished(start_time);
       LineCamera.takePhoto();
       lcd.setCursor(7,3);
-      lcd.print("HOME ");
-      debug("lane2");
+      lcd.print("FINISH");
+      debug("lane2_finish");
     }
     if(Lane3.trigered() && !Lane3.finished){  //Lane3 finish
       Lane3.race_finished(start_time);
       LineCamera.takePhoto();
-      lcd.setCursor(13,3);
-      lcd.print("HOME ");
-      debug("lane3");
+      lcd.setCursor(14,3);
+      lcd.print("FINISH");
+      debug("lane3_finish");
     }
     if(r_triggered()){  //race cancled
       reset();
@@ -97,7 +97,7 @@ void mainFunction(){
       display_message(3);
     }
     LineCamera.check();  //check if cameraTriger can be released
-    print_time();
+    print_currentTime();
     if(Lane1.finished && Lane2.finished && Lane3.finished){
       debug("finish");
       display_message(5);
@@ -132,12 +132,12 @@ bool r_triggered(){
 }//END bool r_triggered()
 
 
-void print_time(){
+void print_currentTime(){
   double rTime = millis() - start_time;
   rTime = rTime / 1000;
-  lcd.setCursor(7,1);
-  lcd.print(rTime);
-}//END void print_time()
+  lcd.setCursor(5,1);
+  lcd.print(format_time(rTime));
+}//END void print_currentTime()
 
 
 void display_message(int _message){
@@ -174,22 +174,38 @@ void display_message(int _message){
     case 4://race started
       lcd.setCursor(0,0);lcd.print("    ACTIVE RACE     ");
       lcd.setCursor(0,1);lcd.print("                    ");
-      lcd.setCursor(0,2);lcd.print("|LANE1|LANE2|LANE3| ");
-      lcd.setCursor(0,3);lcd.print("|GOING|GOING|GOING| ");
+      lcd.setCursor(0,2);lcd.print("LANE1 |LANE2 |LANE3 ");
+      lcd.setCursor(0,3);lcd.print("GOING |GOING |GOING ");
       break;
   
     case 5://print finish time
       lcd.clear();
       lcd.setCursor(0,0);lcd.print("   RACE FINISHED    ");
       lcd.setCursor(0,1);lcd.print("LANE1:");
-      lcd.setCursor(8,1);lcd.print(Lane1.duration);lcd.print(" sec.");
+      lcd.setCursor(6,1);lcd.print(format_time(Lane1.duration));
       lcd.setCursor(0,2);lcd.print("LANE2:");
-      lcd.setCursor(8,2);lcd.print(Lane2.duration);lcd.print(" sec.");
+      lcd.setCursor(6,2);lcd.print(format_time(Lane2.duration));
       lcd.setCursor(0,3);lcd.print("LANE3:");
-      lcd.setCursor(8,3);lcd.print(Lane3.duration);lcd.print(" sec.");
+      lcd.setCursor(6,3);lcd.print(format_time(Lane3.duration));
       break;
 
     default:
       break;
   }
 }//END display_message(...)
+
+
+String format_time(double _time){
+  String text = "";
+  if(_time < 10)
+    text = "  ";
+  else if(_time <100)
+    text = " ";
+  else
+    text = "";
+
+  text += _time;
+  text += "sec.";
+
+  return text;
+}
