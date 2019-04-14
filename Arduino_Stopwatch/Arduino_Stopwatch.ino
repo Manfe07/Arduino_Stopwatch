@@ -51,6 +51,8 @@ void loop() {
 
 
 void reset(){
+  armed = false;
+  activeRace = false;
   debug("reset");
 
   Lane1.reset();
@@ -95,6 +97,7 @@ void mainFunction(){
       reset();
       disarm();
       display_message(3);
+      break;
     }
     LineCamera.check();  //check if cameraTriger can be released
     print_currentTime();
