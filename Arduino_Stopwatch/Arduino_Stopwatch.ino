@@ -124,11 +124,13 @@ void arm(){
   display_message(1);
 }//END void arm()
 
+
 void disarm(){ 
   armed = false;
   debug("disarmed");
   display_message(2);
 }//END void disarm()
+
 
 bool r_triggered(){
   return !digitalRead(Button_R);
@@ -183,7 +185,7 @@ void display_message(int _message){
   
     case 5://print finish time
       lcd.clear();
-      lcd.setCursor(0,0);lcd.print("   RACE FINISHED    ");
+      lcd.setCursor(0,0);lcd.print("-------FINISH-------");
       lcd.setCursor(0,1);lcd.print("LANE1:");
       lcd.setCursor(6,1);lcd.print(format_time(Lane1.duration));
       lcd.setCursor(0,2);lcd.print("LANE2:");
