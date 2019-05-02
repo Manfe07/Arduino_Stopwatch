@@ -16,7 +16,7 @@ namespace Stoppwatch
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Stoppwatch());
+            Application.Run(new Form1());
         }
     }
 }
