@@ -5,7 +5,7 @@ class Lane{
   public:
     Lane(int);
     bool finished;
-    double duration;
+    float duration;
     bool trigered(); 
     void race_finished(unsigned long);
     void reset();

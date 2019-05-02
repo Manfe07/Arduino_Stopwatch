@@ -3,6 +3,7 @@
 #include "wiring.h"
 #include "settings.h"
 #include "functions.h"
+#include "RS485_bus.h"
 #include <Wire.h> 
 #include <LiquidCrystal_I2C.h>
 
@@ -22,7 +23,7 @@ Camera LineCamera(Camera_Triger, photo_duration);
 
 void setup() {
   Serial.begin(9600);
-  debug("connected");
+  debug("connected"); //the debug function needs to be activated in functions.cpp
   pinMode(Button_R,INPUT_PULLUP);  
 
   lcd.init();           //init LCD

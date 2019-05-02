@@ -3,9 +3,11 @@
 
 
 void debug(char _text[]){
-  Serial.print(millis());
-  Serial.print(" - ");
-  Serial.println(_text);
+  if(false){
+    Serial.print(millis());
+    Serial.print(" - ");
+    Serial.println(_text);
+  }
 }//END void debug(...)
 
 
