@@ -37,3 +37,11 @@
 
 #Visual Studio Code
 *\.vscode
+
+#Visual Studio
+bin/
+obj/
+.vs/
+*.suo
+*.user
+PcApplication/Stoppwatch/Stoppwatch/App.config
