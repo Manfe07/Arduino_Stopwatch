@@ -12,13 +12,14 @@ LiquidCrystal_I2C lcd(0x27,20,4);  // set the LCD address to 0x27 for a 16 chars
 
 //variables
 bool armed = false;
+bool busTrigger = false;
 bool activeRace = false;
 unsigned long start_time;
 
 Lane Lane1(Button_L1);
 Lane Lane2(Button_L2);
 Lane Lane3(Button_L3);
-Bus 
+Bus bus(RS485_Pin);
 Camera LineCamera(Camera_Triger, photo_duration);
 
 void setup() {
@@ -47,9 +48,42 @@ void loop() {
       disarm();
       wait(Button_R,saveTime_long);
     }
-  }
+    serialEvent();
+  }//END while(armed)
+  serialEvent();
 }//END void loop()
 
+void serialEvent() {
+  uint8_t code;
+  uint16_t value;
+  ping();
+  if (bus.get(code, value)) {
+    switch (code) {
+      case C_mode:
+        switch (value){
+          case M_start:
+            if(armed){
+              busTrigger = true;
+            }
+            break;
+          default:
+            break;
+        }//END switch(value)
+        break;//END case C_mode;
+      default:
+        break;
+    }//END switch(code)
+  }//END if(-data available-)
+}//END void serialEvent()
+
+void ping(){
+  static long oldTime;
+  long now = millis();
+  if(now > oldTime){
+    bus.send(C_ping,0);
+    oldTime = now + ping_duration;
+  }
+}
 
 void reset(){
   armed = false;
@@ -65,36 +99,40 @@ void reset(){
 
 
 void mainFunction(){
-  if(Lane1.trigered() || Lane2.trigered() || Lane3.trigered()){
+  if(Lane1.trigered() || Lane2.trigered() || Lane3.trigered() || busTrigger){
     debug("start");
     start_time = millis();
     activeRace = true;
+    busTrigger = false;
     display_message(4);
+    bus.send(C_mode, M_startHorn);
     delay(saveTime_long);
   }//END if(-any Button pressed-)
   while(activeRace){
+    serialEvent();
     if(Lane1.trigered() && !Lane1.finished){  //Lane1 finish
       Lane1.race_finished(start_time);
       LineCamera.takePhoto();
-      lcd.setCursor(0,3);
-      lcd.print("FINISH");
+      bus.send(C_mode, M_finish);
+      lcd.setCursor(0,3); lcd.print("FINISH");
       debug("lane1_finish");
     }
     if(Lane2.trigered() && !Lane2.finished){  //Lane2 finish
       Lane2.race_finished(start_time);
       LineCamera.takePhoto();
-      lcd.setCursor(7,3);
-      lcd.print("FINISH");
+      bus.send(C_mode, M_finish);
+      lcd.setCursor(7,3); lcd.print("FINISH");
       debug("lane2_finish");
     }
     if(Lane3.trigered() && !Lane3.finished){  //Lane3 finish
       Lane3.race_finished(start_time);
       LineCamera.takePhoto();
-      lcd.setCursor(14,3);
-      lcd.print("FINISH");
+      bus.send(C_mode, M_finish);
+      lcd.setCursor(14,3); lcd.print("FINISH");
       debug("lane3_finish");
     }
     if(r_triggered()){  //race cancled
+      bus.send(C_mode, M_cancled);
       reset();
       disarm();
       display_message(3);
@@ -106,8 +144,13 @@ void mainFunction(){
       debug("finish");
       display_message(5);
       activeRace = false;
+      bus.send(C_mode, M_disarm);
+      bus.send(C_pTime1, (Lane1.duration * 100));
+      bus.send(C_pTime2, (Lane2.duration * 100));
+      bus.send(C_pTime3, (Lane3.duration * 100));
 
       while(armed){
+        serialEvent();
         if(r_triggered()){
           disarm();
           wait(Button_R,saveTime_long);
@@ -121,6 +164,7 @@ void mainFunction(){
 
 void arm(){
   armed = true;
+  bus.send(C_mode, M_arm);
   debug("armed");
   display_message(1);
 }//END void arm()
@@ -128,6 +172,7 @@ void arm(){
 
 void disarm(){ 
   armed = false;
+  bus.send(C_mode, M_disarm);
   debug("disarmed");
   display_message(2);
 }//END void disarm()

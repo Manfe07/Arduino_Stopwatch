@@ -32,7 +32,7 @@ int Bus::get(uint8_t& _code, uint16_t& _value) {
 
 int Bus::send(uint8_t _code, uint16_t _value) {
   byte data1 = _code;
-  byte data2 = ((_value & 0xFF00) >> 8);
+  byte data2 = ((_value  & 0xFF00) >> 8);
   byte data3 = (_value & 0x00FF);
   if (Serial.available() == 0) {
     digitalWrite(enablePin, HIGH);

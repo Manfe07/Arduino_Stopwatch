@@ -19,10 +19,13 @@
 
 
 // Mode code
-#define M_stop      0x0000
-#define M_start     0x0001
-#define M_arm       0x0002
-#define M_disarm    0x0003
+#define M_disarm    0x0000
+#define M_arm       0x0001
+#define M_stop      0x0002
+#define M_start     0x0003
+#define M_startHorn 0x0004
+#define M_finish    0x0005    //for every line finish
+#define M_cancled   0x0006
 
 
 
