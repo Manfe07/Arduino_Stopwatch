@@ -26,12 +26,12 @@
 
 
 
-class bus {
+class Bus {
   private:
     int enablePin;
   public:
-    bus(int);
+    Bus(int);
     int get(uint8_t&, uint16_t&);
-    int send(uint8_t, float);
+    int send(uint8_t, uint16_t);
 };
 #endif

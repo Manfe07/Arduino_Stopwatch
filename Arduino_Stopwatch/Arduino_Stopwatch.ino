@@ -18,7 +18,7 @@ unsigned long start_time;
 Lane Lane1(Button_L1);
 Lane Lane2(Button_L2);
 Lane Lane3(Button_L3);
-
+Bus 
 Camera LineCamera(Camera_Triger, photo_duration);
 
 void setup() {

@@ -1,12 +1,12 @@
-#include "RS485_bus.h"
+#include "RS485_Bus.h"
 
-bus::bus(int Pin) {
+Bus::Bus(int Pin) {
   enablePin = Pin;
   pinMode(enablePin, OUTPUT);
   digitalWrite(enablePin, LOW);
 }
 
-int bus::get(uint8_t& _code, uint16_t& _value) {
+int Bus::get(uint8_t& _code, uint16_t& _value) {
 #define msg_l   5
   if (Serial.available() >= msg_l) {
     uint8_t data[msg_l];
@@ -30,11 +30,10 @@ int bus::get(uint8_t& _code, uint16_t& _value) {
     return 0;
 }
 
-int bus::send(uint8_t _code, float _value) {
-  uint16_t temp = _value * 10;
+int Bus::send(uint8_t _code, uint16_t _value) {
   byte data1 = _code;
-  byte data2 = ((temp & 0xFF00) >> 8);
-  byte data3 = (temp & 0x00FF);
+  byte data2 = ((_value & 0xFF00) >> 8);
+  byte data3 = (_value & 0x00FF);
   if (Serial.available() == 0) {
     digitalWrite(enablePin, HIGH);
     Serial.write(start_byte);
