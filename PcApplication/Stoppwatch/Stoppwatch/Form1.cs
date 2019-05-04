@@ -17,28 +17,28 @@ namespace Stoppwatch
 
         bool ping = true;
         //Validation Bytes
-        byte start_byte = 0xF5;
-        byte stop_byte  = 0x0D;
+        const byte start_byte = 0xF5;
+        const byte stop_byte  = 0x0D;
 
         //Bus Message code
-        byte C_mode     = 0x02;   //Counter-Value
-        byte C_pTime1   = 0x11;   //preview Time1
-        byte C_ping     = 0x01;   //send ping
-        byte C_pTime2   = 0x12;   //preview Time2
-        byte C_pTime3   = 0x13;  //preview Time3
-        byte C_oTime1   = 0x21;  //official Time1
-        byte C_oTime2   = 0x22;   //official Time2
-        byte C_oTime3   = 0x23;   //official Time3
+        const byte C_mode     = 0x02;   //Counter-Value
+        const byte C_pTime1   = 0x11;   //preview Time1
+        const byte C_ping     = 0x01;   //send ping
+        const byte C_pTime2   = 0x12;   //preview Time2
+        const byte C_pTime3   = 0x13;  //preview Time3
+        const byte C_oTime1   = 0x21;  //official Time1
+        const byte C_oTime2   = 0x22;   //official Time2
+        const byte C_oTime3   = 0x23;   //official Time3
 
 
         // Mode code
-        byte M_disarm   = 0x0000;
-        byte M_arm      = 0x0001;
-        byte M_stop     = 0x0002;
-        byte M_start    = 0x0003;
-        byte M_startHorn= 0x0004;
-        byte M_finish   = 0x0005;   //for every line finish
-        byte M_cancled  = 0x0006;
+        const byte M_disarm    = 0x0000;
+        const byte M_arm       = 0x0001;
+        const byte M_stop      = 0x0002;
+        const byte M_start     = 0x0003;
+        const byte M_startHorn = 0x0004;
+        const byte M_finish    = 0x0005;   //for every line finish
+        const byte M_cancled   = 0x0006;
 
 
 
@@ -128,9 +128,13 @@ namespace Stoppwatch
                     {
                         Code = (data[1] & 0xFF);
                         Value = ((data[2] << 8) | (data[3]));
-                        if(Code == C_ping)
+                        switch (Code)
                         {
-                            ping = true;
+                            case C_ping:
+                                break;
+                                ping = true;
+                            default:
+                                break;
                         }
                     }
                 }                
@@ -138,3 +142,4 @@ namespace Stoppwatch
         }
     }
 }
+
