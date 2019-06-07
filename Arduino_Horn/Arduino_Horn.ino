@@ -87,11 +87,11 @@ void ping(bool _received){
   long now = millis();
   if(now > oldTime){
     oldTime = now + ping_duration;
-    digitalWrite(StatusLED, LOW);
+    digitalWrite(StatusLED, HIGH);
   }
   if(_received){
     oldTime = now + ping_duration;
-    digitalWrite(StatusLED, HIGH);
+    digitalWrite(StatusLED, LOW);
   }
 }//END void ping()
 
