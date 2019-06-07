@@ -8,6 +8,6 @@
 
 #define RS485_Pin   7
 
-#define Camera_Triger 6
+#define Camera_Triger 0
 
 #endif
