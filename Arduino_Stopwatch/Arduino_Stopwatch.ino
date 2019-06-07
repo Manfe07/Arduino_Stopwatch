@@ -100,12 +100,18 @@ void reset(){
 
 void mainFunction(){
   if(Lane1.trigered() || Lane2.trigered() || Lane3.trigered() || busTrigger){
+    if(busTrigger){
+      delay(500);
+      bus.send(C_mode, M_startHorn);
+    }
+    else{
+      bus.send(C_mode, M_startHorn);
+    }
     debug("start");
     start_time = millis();
     activeRace = true;
     busTrigger = false;
     display_message(4);
-    bus.send(C_mode, M_startHorn);
     delay(saveTime_long);
   }//END if(-any Button pressed-)
   while(activeRace){
