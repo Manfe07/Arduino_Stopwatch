@@ -41,7 +41,7 @@ int Bus::send(uint8_t _code, uint16_t _value) {
     Serial.write(data2);
     Serial.write(data3);
     Serial.write(stop_byte);
-    delay(1);
+    delay(6);
     digitalWrite(enablePin, LOW);
     return 1;
   }
