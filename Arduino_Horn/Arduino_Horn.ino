@@ -12,8 +12,8 @@ bool honk_finish = true;
 
 int finish_counter = 0;
 //horn times
-int Horn_Start_Duration = 1000;
-int Horn_Finish_Duration = 500;
+int Horn_Start_Duration = 750;
+int Horn_Finish_Duration = 300;
 
 void setup() {
   Serial.begin(9600);
@@ -105,4 +105,5 @@ void honk(int _HornPin, int _duration){
   digitalWrite(_HornPin, HIGH);
   delay(_duration);
   digitalWrite(_HornPin, LOW);
+  delay(200);
 }//END void honk(...)
