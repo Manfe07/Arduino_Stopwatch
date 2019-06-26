@@ -2,6 +2,7 @@
 #include "functions.h"
 #include <arduino.h>
 
+
 Camera::Camera(int _pin, int _duration){
   Camera::pin = _pin;
   Camera::duration = _duration;
@@ -23,7 +24,7 @@ void Camera::takePhoto(){
 
 void Camera::check(){
   if(Camera::trigered && !Camera::stoped){
-    if((Camera::time_trigered + Camera::duration) >= millis()){
+    if((Camera::time_trigered + Camera::duration) <= millis()){
       digitalWrite(Camera::pin, LOW);
       Camera::stoped = true;
     debug("camera-stop");
