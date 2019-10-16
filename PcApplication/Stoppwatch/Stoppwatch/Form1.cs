@@ -131,8 +131,8 @@ namespace Stoppwatch
                         switch (Code)
                         {
                             case C_ping:
-                                break;
                                 ping = true;
+                                break;
                             default:
                                 break;
                         }
