@@ -1,0 +1,6 @@
+﻿namespace Stoppwatch
+{
+    class Time
+    {
+    }
+}
