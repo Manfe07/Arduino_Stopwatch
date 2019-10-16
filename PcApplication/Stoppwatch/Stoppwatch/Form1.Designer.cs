@@ -31,17 +31,20 @@
             this.components = new System.ComponentModel.Container();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel_Connection = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel_split_unit = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage_main = new System.Windows.Forms.TabPage();
             this.groupBox_Time = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.button_setTime = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
-            this.label3 = new System.Windows.Forms.Label();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.textBox_time_3 = new System.Windows.Forms.TextBox();
+            this.textBox_time_2 = new System.Windows.Forms.TextBox();
+            this.textBox_time_1 = new System.Windows.Forms.TextBox();
+            this.label_Lane1 = new System.Windows.Forms.Label();
+            this.label_Lane2 = new System.Windows.Forms.Label();
+            this.label_Lane3 = new System.Windows.Forms.Label();
             this.tabPage_settings = new System.Windows.Forms.TabPage();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.checkBox_AllwaysOnTop = new System.Windows.Forms.CheckBox();
             this.button_PortScan = new System.Windows.Forms.Button();
             this.button_Disconnect = new System.Windows.Forms.Button();
             this.button_Connect = new System.Windows.Forms.Button();
@@ -49,23 +52,25 @@
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.timer_Serial = new System.Windows.Forms.Timer(this.components);
             this.timer_ping = new System.Windows.Forms.Timer(this.components);
+            this.label_place1 = new System.Windows.Forms.Label();
+            this.label_place2 = new System.Windows.Forms.Label();
+            this.label_place3 = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage_main.SuspendLayout();
             this.groupBox_Time.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.tabPage_settings.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel_Connection});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 186);
+            this.toolStripStatusLabel_Connection,
+            this.toolStripStatusLabel_split_unit,
+            this.toolStripStatusLabel1});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 176);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(242, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(223, 22);
             this.statusStrip1.TabIndex = 0;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -73,8 +78,24 @@
             // 
             this.toolStripStatusLabel_Connection.BackColor = System.Drawing.Color.Red;
             this.toolStripStatusLabel_Connection.Name = "toolStripStatusLabel_Connection";
-            this.toolStripStatusLabel_Connection.Size = new System.Drawing.Size(104, 17);
+            this.toolStripStatusLabel_Connection.Size = new System.Drawing.Size(102, 17);
             this.toolStripStatusLabel_Connection.Text = "NOT CONNECTED";
+            // 
+            // toolStripStatusLabel_split_unit
+            // 
+            this.toolStripStatusLabel_split_unit.Name = "toolStripStatusLabel_split_unit";
+            this.toolStripStatusLabel_split_unit.Size = new System.Drawing.Size(16, 17);
+            this.toolStripStatusLabel_split_unit.Text = "   ";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.toolStripStatusLabel1.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(86, 17);
+            this.toolStripStatusLabel1.Text = "Status Pending";
+            this.toolStripStatusLabel1.Click += new System.EventHandler(this.toolStripStatusLabel1_Click);
             // 
             // tabControl1
             // 
@@ -84,7 +105,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(242, 186);
+            this.tabControl1.Size = new System.Drawing.Size(223, 176);
             this.tabControl1.TabIndex = 1;
             // 
             // tabPage_main
@@ -93,108 +114,95 @@
             this.tabPage_main.Location = new System.Drawing.Point(4, 22);
             this.tabPage_main.Name = "tabPage_main";
             this.tabPage_main.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_main.Size = new System.Drawing.Size(234, 160);
+            this.tabPage_main.Size = new System.Drawing.Size(215, 150);
             this.tabPage_main.TabIndex = 0;
             this.tabPage_main.Text = "Main";
             this.tabPage_main.UseVisualStyleBackColor = true;
             // 
             // groupBox_Time
             // 
-            this.groupBox_Time.Controls.Add(this.label1);
-            this.groupBox_Time.Controls.Add(this.button_setTime);
-            this.groupBox_Time.Controls.Add(this.label2);
-            this.groupBox_Time.Controls.Add(this.numericUpDown3);
-            this.groupBox_Time.Controls.Add(this.label3);
-            this.groupBox_Time.Controls.Add(this.numericUpDown2);
-            this.groupBox_Time.Controls.Add(this.numericUpDown1);
+            this.groupBox_Time.Controls.Add(this.label_place3);
+            this.groupBox_Time.Controls.Add(this.label_place2);
+            this.groupBox_Time.Controls.Add(this.label_place1);
+            this.groupBox_Time.Controls.Add(this.textBox_time_3);
+            this.groupBox_Time.Controls.Add(this.textBox_time_2);
+            this.groupBox_Time.Controls.Add(this.textBox_time_1);
+            this.groupBox_Time.Controls.Add(this.label_Lane1);
+            this.groupBox_Time.Controls.Add(this.label_Lane2);
+            this.groupBox_Time.Controls.Add(this.label_Lane3);
             this.groupBox_Time.Enabled = false;
             this.groupBox_Time.Location = new System.Drawing.Point(8, 6);
             this.groupBox_Time.Name = "groupBox_Time";
-            this.groupBox_Time.Size = new System.Drawing.Size(131, 120);
+            this.groupBox_Time.Size = new System.Drawing.Size(199, 124);
             this.groupBox_Time.TabIndex = 4;
             this.groupBox_Time.TabStop = false;
             this.groupBox_Time.Text = "Time";
             // 
-            // label1
+            // textBox_time_3
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 16);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(43, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Lane 1:";
+            this.textBox_time_3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.textBox_time_3.Location = new System.Drawing.Point(71, 83);
+            this.textBox_time_3.Name = "textBox_time_3";
+            this.textBox_time_3.ReadOnly = true;
+            this.textBox_time_3.Size = new System.Drawing.Size(96, 26);
+            this.textBox_time_3.TabIndex = 1;
+            this.textBox_time_3.Text = "123,45";
+            this.textBox_time_3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // button_setTime
+            // textBox_time_2
             // 
-            this.button_setTime.Location = new System.Drawing.Point(9, 91);
-            this.button_setTime.Name = "button_setTime";
-            this.button_setTime.Size = new System.Drawing.Size(115, 23);
-            this.button_setTime.TabIndex = 3;
-            this.button_setTime.Text = "Set";
-            this.button_setTime.UseVisualStyleBackColor = true;
+            this.textBox_time_2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.textBox_time_2.Location = new System.Drawing.Point(71, 51);
+            this.textBox_time_2.Name = "textBox_time_2";
+            this.textBox_time_2.ReadOnly = true;
+            this.textBox_time_2.Size = new System.Drawing.Size(96, 26);
+            this.textBox_time_2.TabIndex = 1;
+            this.textBox_time_2.Text = "123,45";
+            this.textBox_time_2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox_time_2.TextChanged += new System.EventHandler(this.textBox_time_2_TextChanged);
             // 
-            // label2
+            // textBox_time_1
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 41);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(43, 13);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Lane 2:";
+            this.textBox_time_1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.textBox_time_1.Location = new System.Drawing.Point(71, 19);
+            this.textBox_time_1.Name = "textBox_time_1";
+            this.textBox_time_1.ReadOnly = true;
+            this.textBox_time_1.Size = new System.Drawing.Size(96, 26);
+            this.textBox_time_1.TabIndex = 1;
+            this.textBox_time_1.Text = "123,45";
+            this.textBox_time_1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // numericUpDown3
+            // label_Lane1
             // 
-            this.numericUpDown3.DecimalPlaces = 2;
-            this.numericUpDown3.Location = new System.Drawing.Point(55, 65);
-            this.numericUpDown3.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numericUpDown3.Name = "numericUpDown3";
-            this.numericUpDown3.Size = new System.Drawing.Size(69, 20);
-            this.numericUpDown3.TabIndex = 2;
-            this.numericUpDown3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.label_Lane1.AutoSize = true;
+            this.label_Lane1.Location = new System.Drawing.Point(6, 27);
+            this.label_Lane1.Name = "label_Lane1";
+            this.label_Lane1.Size = new System.Drawing.Size(59, 13);
+            this.label_Lane1.TabIndex = 0;
+            this.label_Lane1.Text = "Lane 1: (X)";
             // 
-            // label3
+            // label_Lane2
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 67);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(43, 13);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Lane 3:";
+            this.label_Lane2.AutoSize = true;
+            this.label_Lane2.Location = new System.Drawing.Point(6, 59);
+            this.label_Lane2.Name = "label_Lane2";
+            this.label_Lane2.Size = new System.Drawing.Size(59, 13);
+            this.label_Lane2.TabIndex = 0;
+            this.label_Lane2.Text = "Lane 2: (X)";
             // 
-            // numericUpDown2
+            // label_Lane3
             // 
-            this.numericUpDown2.DecimalPlaces = 2;
-            this.numericUpDown2.Location = new System.Drawing.Point(55, 39);
-            this.numericUpDown2.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(69, 20);
-            this.numericUpDown2.TabIndex = 2;
-            this.numericUpDown2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.DecimalPlaces = 2;
-            this.numericUpDown1.Location = new System.Drawing.Point(55, 13);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(69, 20);
-            this.numericUpDown1.TabIndex = 2;
-            this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.label_Lane3.AutoSize = true;
+            this.label_Lane3.Location = new System.Drawing.Point(6, 91);
+            this.label_Lane3.Name = "label_Lane3";
+            this.label_Lane3.Size = new System.Drawing.Size(59, 13);
+            this.label_Lane3.TabIndex = 0;
+            this.label_Lane3.Text = "Lane 3: (X)";
             // 
             // tabPage_settings
             // 
+            this.tabPage_settings.Controls.Add(this.linkLabel1);
+            this.tabPage_settings.Controls.Add(this.checkBox_AllwaysOnTop);
             this.tabPage_settings.Controls.Add(this.button_PortScan);
             this.tabPage_settings.Controls.Add(this.button_Disconnect);
             this.tabPage_settings.Controls.Add(this.button_Connect);
@@ -202,10 +210,35 @@
             this.tabPage_settings.Location = new System.Drawing.Point(4, 22);
             this.tabPage_settings.Name = "tabPage_settings";
             this.tabPage_settings.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_settings.Size = new System.Drawing.Size(234, 160);
+            this.tabPage_settings.Size = new System.Drawing.Size(214, 150);
             this.tabPage_settings.TabIndex = 1;
             this.tabPage_settings.Text = "Settings";
             this.tabPage_settings.UseVisualStyleBackColor = true;
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.LinkBehavior = System.Windows.Forms.LinkBehavior.AlwaysUnderline;
+            this.linkLabel1.Location = new System.Drawing.Point(8, 134);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(191, 13);
+            this.linkLabel1.TabIndex = 4;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "© Manuel Fehren [MF-Technologie.de]";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
+            // checkBox_AllwaysOnTop
+            // 
+            this.checkBox_AllwaysOnTop.AutoSize = true;
+            this.checkBox_AllwaysOnTop.Checked = true;
+            this.checkBox_AllwaysOnTop.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox_AllwaysOnTop.Location = new System.Drawing.Point(9, 64);
+            this.checkBox_AllwaysOnTop.Name = "checkBox_AllwaysOnTop";
+            this.checkBox_AllwaysOnTop.Size = new System.Drawing.Size(98, 17);
+            this.checkBox_AllwaysOnTop.TabIndex = 2;
+            this.checkBox_AllwaysOnTop.Text = "Allways on Top";
+            this.checkBox_AllwaysOnTop.UseVisualStyleBackColor = true;
+            this.checkBox_AllwaysOnTop.CheckedChanged += new System.EventHandler(this.checkBox_AllwaysOnTop_CheckedChanged);
             // 
             // button_PortScan
             // 
@@ -260,11 +293,41 @@
             this.timer_ping.Interval = 3500;
             this.timer_ping.Tick += new System.EventHandler(this.timer_ping_Tick);
             // 
+            // label_place1
+            // 
+            this.label_place1.AutoSize = true;
+            this.label_place1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_place1.Location = new System.Drawing.Point(167, 19);
+            this.label_place1.Name = "label_place1";
+            this.label_place1.Size = new System.Drawing.Size(32, 24);
+            this.label_place1.TabIndex = 2;
+            this.label_place1.Text = "(x)";
+            // 
+            // label_place2
+            // 
+            this.label_place2.AutoSize = true;
+            this.label_place2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_place2.Location = new System.Drawing.Point(167, 51);
+            this.label_place2.Name = "label_place2";
+            this.label_place2.Size = new System.Drawing.Size(32, 24);
+            this.label_place2.TabIndex = 3;
+            this.label_place2.Text = "(x)";
+            // 
+            // label_place3
+            // 
+            this.label_place3.AutoSize = true;
+            this.label_place3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_place3.Location = new System.Drawing.Point(167, 83);
+            this.label_place3.Name = "label_place3";
+            this.label_place3.Size = new System.Drawing.Size(32, 24);
+            this.label_place3.TabIndex = 4;
+            this.label_place3.Text = "(x)";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(242, 208);
+            this.ClientSize = new System.Drawing.Size(223, 198);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.statusStrip1);
             this.Name = "Form1";
@@ -276,10 +339,8 @@
             this.tabPage_main.ResumeLayout(false);
             this.groupBox_Time.ResumeLayout(false);
             this.groupBox_Time.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.tabPage_settings.ResumeLayout(false);
+            this.tabPage_settings.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -291,13 +352,9 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel_Connection;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage_main;
-        private System.Windows.Forms.Button button_setTime;
-        private System.Windows.Forms.NumericUpDown numericUpDown3;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label_Lane3;
+        private System.Windows.Forms.Label label_Lane2;
+        private System.Windows.Forms.Label label_Lane1;
         private System.Windows.Forms.TabPage tabPage_settings;
         private System.Windows.Forms.Button button_PortScan;
         private System.Windows.Forms.Button button_Disconnect;
@@ -307,6 +364,16 @@
         private System.IO.Ports.SerialPort serialPort1;
         private System.Windows.Forms.Timer timer_Serial;
         private System.Windows.Forms.Timer timer_ping;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel_split_unit;
+        private System.Windows.Forms.TextBox textBox_time_3;
+        private System.Windows.Forms.TextBox textBox_time_2;
+        private System.Windows.Forms.TextBox textBox_time_1;
+        private System.Windows.Forms.CheckBox checkBox_AllwaysOnTop;
+        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.Label label_place3;
+        private System.Windows.Forms.Label label_place2;
+        private System.Windows.Forms.Label label_place1;
     }
 }
 
